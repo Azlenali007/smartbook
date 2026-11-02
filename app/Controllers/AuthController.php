@@ -11,7 +11,7 @@ use SmartKhata\CSRF;
 class AuthController {
     public function showLogin(): void {
         if (Auth::check()) {
-            header('Location: /');
+            header('Location: /dashboard');
             exit;
         }
 
@@ -35,8 +35,11 @@ class AuthController {
 
         $res = Auth::login($username, $password);
         if ($res['success']) {
-            $target = $_SESSION['intended_url'] ?? '/';
+            $target = $_SESSION['intended_url'] ?? '/dashboard';
             unset($_SESSION['intended_url']);
+            if ($target === '/' || $target === '/login' || $target === '/index.html') {
+                $target = '/dashboard';
+            }
             header("Location: {$target}");
             exit;
         }
@@ -48,7 +51,7 @@ class AuthController {
 
     public function logout(): void {
         Auth::logout();
-        header('Location: /login');
+        header('Location: /');
         exit;
     }
 }

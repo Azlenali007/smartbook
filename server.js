@@ -22,14 +22,30 @@ for (const d of dirs) {
   }
 }
 
-// Spawn PHP process
-const phpProcess = spawn('php', ['-S', `127.0.0.1:${PHP_PORT}`, 'router.php'], {
-  stdio: 'inherit'
-});
+// Resilient PHP process supervisor
+let phpProcess = null;
+function startPhp() {
+  try {
+    phpProcess = spawn('php', ['-S', `127.0.0.1:${PHP_PORT}`, 'router.php'], {
+      stdio: 'inherit'
+    });
 
-phpProcess.on('error', (err) => {
-  console.error('[SmartKhata] Failed to start PHP server:', err);
-});
+    phpProcess.on('error', (err) => {
+      console.error('[SmartKhata] Failed to spawn PHP server:', err.message);
+    });
+
+    phpProcess.on('exit', (code, signal) => {
+      if (signal !== 'SIGINT' && signal !== 'SIGTERM') {
+        console.warn(`[SmartKhata] PHP process exited (code ${code}, signal ${signal}). Restarting in 1s...`);
+        setTimeout(startPhp, 1000);
+      }
+    });
+  } catch (e) {
+    console.error('[SmartKhata] Exception starting PHP:', e.message);
+  }
+}
+
+startPhp();
 
 // Wait briefly for PHP to bind
 setTimeout(() => {

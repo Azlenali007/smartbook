@@ -86,7 +86,7 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
       <!-- Navigation Links -->
       <nav class="flex-1 px-4 py-3 space-y-1 overflow-y-auto text-sm">
-        <a href="/" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition <?= $currentRoute === '/' ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' ?>">
+        <a href="/dashboard" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg font-medium transition <?= ($currentRoute === '/dashboard' || $currentRoute === '/') ? 'bg-blue-600 text-white' : 'hover:bg-slate-800 hover:text-white' ?>">
           <svg class="w-5 h-5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
           <span>Dashboard</span>
         </a>
@@ -179,9 +179,9 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
   <!-- Mobile Bottom Tab Navigation -->
   <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex items-center justify-around py-2 z-40 safe-pb shadow-lg">
-    <a href="/" class="flex flex-col items-center py-1 px-3 text-xs <?= $currentRoute === '/' ? 'text-blue-600 font-bold' : 'text-slate-500 hover:text-slate-800' ?>">
+    <a href="/dashboard" class="flex flex-col items-center py-1 px-3 text-xs <?= ($currentRoute === '/dashboard' || $currentRoute === '/') ? 'text-blue-600 font-bold' : 'text-slate-500 hover:text-slate-800' ?>">
       <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      <span>Home</span>
+      <span>Dashboard</span>
     </a>
 
     <a href="/customers" class="flex flex-col items-center py-1 px-3 text-xs <?= str_starts_with($currentRoute, '/customers') ? 'text-blue-600 font-bold' : 'text-slate-500 hover:text-slate-800' ?>">

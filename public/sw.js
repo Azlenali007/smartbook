@@ -4,9 +4,8 @@
  * Strictly NEVER caches financial data, invoices, or authenticated responses.
  */
 
-const CACHE_NAME = 'smart-khata-static-v1.0.0';
+const CACHE_NAME = 'smart-khata-static-v1.1.0';
 const STATIC_ASSETS = [
-  '/',
   '/offline.html',
   '/manifest.webmanifest',
   '/favicon.svg',

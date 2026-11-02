@@ -7,6 +7,7 @@ require_once dirname(__DIR__) . '/app/bootstrap.php';
 
 use SmartKhata\Services\InstallerService;
 use SmartKhata\Controllers\AuthController;
+use SmartKhata\Controllers\LandingController;
 use SmartKhata\Controllers\DashboardController;
 use SmartKhata\Controllers\CustomerController;
 use SmartKhata\Controllers\InvoiceController;
@@ -37,10 +38,20 @@ if (!InstallerService::isInstalled()) {
 // Router Dispatch
 try {
     switch ($requestUri) {
-        // Dashboard
+        // Landing Page
         case '/':
+            (new LandingController())->index();
+            break;
+
+        // Dashboard
+        case '/dashboard':
             (new DashboardController())->index();
             break;
+
+        // Normalize /index.html to /
+        case '/index.html':
+            header('Location: /', true, 301);
+            exit;
 
         // Auth
         case '/login':

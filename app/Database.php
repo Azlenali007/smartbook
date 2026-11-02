@@ -57,11 +57,15 @@ class Database {
         }
     }
 
-    public static function init(array $config): self {
-        if (self::$instance === null) {
+    public static function init(array $config, bool $force = false): self {
+        if (self::$instance === null || $force) {
             self::$instance = new self($config);
         }
         return self::$instance;
+    }
+
+    public static function resetInstance(): void {
+        self::$instance = null;
     }
 
     public static function getInstance(): self {

@@ -40,7 +40,7 @@ InstallerService::createAdminAndSettings($pdo, 'testadmin', 'AdminPass@123', [
 Database::init([
     'db_driver' => 'sqlite',
     'db_path' => $testDbPath
-]);
+], true);
 
 $passed = 0;
 $failed = 0;
@@ -239,6 +239,27 @@ assertTest("PWA 512x512 PNG Icon Exists", file_exists(dirname(__DIR__) . '/publi
 assertTest("PWA Apple Touch PNG Icon Exists", file_exists(dirname(__DIR__) . '/public/apple-touch-icon.png'));
 assertTest("PWA Service Worker Exists", file_exists(dirname(__DIR__) . '/public/sw.js'));
 assertTest("PWA Offline Fallback HTML Exists", file_exists(dirname(__DIR__) . '/public/offline.html'));
+
+// ---------------------------------------------------------
+// TEST 10: Landing Page & Homepage Routing Compliance
+// ---------------------------------------------------------
+$landingFile = dirname(__DIR__) . '/app/Views/home/landing.php';
+$landingExists = file_exists($landingFile);
+$landingHtml = $landingExists ? file_get_contents($landingFile) : '';
+
+assertTest("Landing Page View Exists", $landingExists);
+assertTest("Landing Page Has Admin Login CTA", str_contains($landingHtml, 'Admin Login'));
+assertTest("Landing Page Has Branding & Features", str_contains($landingHtml, 'Customer Khata') && str_contains($landingHtml, 'Smart FIFO Allocation'));
+assertTest("Landing Page Has Mobile / PWA CTA", str_contains($landingHtml, 'Install'));
+assertTest("Landing Page Does Not Have Redirect Placeholder", !str_contains($landingHtml, 'Redirect to Smart Khata'));
+
+$swJs = file_get_contents(dirname(__DIR__) . '/public/sw.js');
+assertTest("Service Worker Excludes '/' From Static Precache", !preg_match("/STATIC_ASSETS\s*=\s*\[[^\]]*'\/',/", $swJs));
+
+$indexPhp = file_get_contents(dirname(__DIR__) . '/public/index.php');
+assertTest("Public Router Has '/' Landing Route", str_contains($indexPhp, "case '/':") && str_contains($indexPhp, "LandingController"));
+assertTest("Public Router Has '/dashboard' Route", str_contains($indexPhp, "case '/dashboard':") && str_contains($indexPhp, "DashboardController"));
+assertTest("Public Router Redirects '/index.html' to '/'", str_contains($indexPhp, "case '/index.html':"));
 
 // ---------------------------------------------------------
 // TEST 10: Mandatory Zero TypeScript Verification
