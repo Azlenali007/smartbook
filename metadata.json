@@ -1,0 +1,6 @@
+{
+  "name": "Smart Khata",
+  "description": "Complete accounting and customer ledger system, udhaar management, billing, invoice and payment management with web installer and installable PWA for Android and iOS.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

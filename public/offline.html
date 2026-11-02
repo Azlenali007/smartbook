@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline — Smart Khata</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4 font-sans text-slate-800">
+  <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-slate-200 text-center">
+    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-5">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 4.243a9 9 0 01-12.728 0m0 0l2.829-2.829m-2.829 2.829L3 21m2.828-15.364a9 9 0 0112.728 0M8.464 15.536a5 5 0 010-7.072m0 0L5.636 5.636M1 1l22 22"/>
+      </svg>
+    </div>
+    <h1 class="text-2xl font-bold text-slate-900 mb-2">You are currently offline</h1>
+    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+      Smart Khata requires an active internet connection to ensure accounting precision and prevent out-of-sync financial records.
+    </p>
+    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 text-left mb-6">
+      <div class="font-semibold text-slate-800 mb-1">Financial Integrity Protection:</div>
+      Offline ledger and invoice modifications are intentionally disabled to guarantee exact transaction history, sequential invoice numbering, and server-side balance reconciliation.
+    </div>
+    <button onclick="window.location.reload()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-xl transition shadow">
+      Retry Connection
+    </button>
+  </div>
+</body>
+</html>
